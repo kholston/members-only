@@ -1,11 +1,16 @@
+require("dotenv").config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require("express-session");
+const passport = require("passport");
+const { strategy, serialize, deserialize } = require("./config/passportConfig");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const messagesRouter = require('./routes/messages');
 
 var app = express();
 
@@ -19,8 +24,23 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
+
+passport.use(strategy);
+passport.serializeUser(serialize);
+passport.deserializeUser(deserialize);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.user;
+  next();
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/messages', messagesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
