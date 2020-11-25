@@ -1,0 +1,28 @@
+extends user-form
+block content  
+  div(class='col-sm-4 offset-sm-4')
+      h1.text-center.text-nowrap #{title}
+      
+      form(method='POST' action="")
+        div.form-group
+          label(for="first_name") First Name
+          input.form-control(type="text" placeholder="First Name" name='first_name' required='true')
+        div.form-group  
+          label(for="last_name") Last Name
+          input.form-control(type="text" placeholder="Last Name" name='last_name' required='true')
+        div.form-group  
+          label(for="username")  Username
+          input.form-control(type="text" placeholder="Username" name='username' required='true')
+        div.form-group  
+          label(for='password') Password
+          input.form-control(type='password' name="password" placeholder='Password' required="true")
+        div.row
+          div.col.d-flex.align-items-center
+                a.text-decoration-none.font-weight-bold(href="/users/sign-in") Sign In Instead
+          div.col
+            button.btn.btn-primary.float-right(type="submit") Sign Up
+  
+      if errors
+        ul
+          for error in errors
+            li!= error.msg
