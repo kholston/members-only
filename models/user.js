@@ -6,6 +6,7 @@ const SALT_WORK_FACTOR = 10;
 const UserSchema = new Schema({
   first_name: { type: String, required: true, maxlength: 100 },
   last_name: { type: String, required: true, maxlength: 100 },
+  email: { type: String, required: true },
   username: { type: String, required: true, maxlength: 13 },
   password: { type: String, required: true, minlength: 6 },
   member_status: {
@@ -13,7 +14,9 @@ const UserSchema = new Schema({
     enum: ['User', 'Member', 'Admin'],
     default: 'User',
     required: true
-  }
+  },
+  admin: { type: Boolean, required: true, default: false }
+
 }, { timestamps: true });
 
 UserSchema
