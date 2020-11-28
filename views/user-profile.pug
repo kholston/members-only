@@ -11,17 +11,18 @@ block content
     div(class='row')
       h4 <strong>Email:</strong> #{locals.currentUser.email}
     div(class='row')
-      h4 <strong>Member Status:</strong> #{locals.currentUser.member_status}
-    div(class='row')
-      p(class="mt-4")
-        a(href="#") Update Password
+      if(locals.currentUser.admin)
+        h4 <strong>Member Status:</strong> #{locals.currentUser.member_status} (Admin)
+      else
+        h4 <strong>Member Status:</strong> #{locals.currentUser.member_status}  
+
     if locals.currentUser.member_status === 'User'
       <hr/>
       div(class='row mt-5')
         p
           a(href="/users/membership-upgrade") Upgrade Membership
-    if locals.currentUser.member_status === 'Admin'
+    if locals.currentUser.admin
       <hr/>
       div(class='row mt-5')
-        p
+        h5
           a(href="#") Admin Panel

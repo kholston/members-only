@@ -3,11 +3,18 @@ extends layout
 block content
   div(class='col-sm-4 offset-sm-4 mt-4')
     h1.text-center.text-nowrap #{title}
-    
-    form(method='POST' action="")
-      div.form-group
-          label(for="admin_code") Please enter your Admin Access code:
-          input.form-control(type="text" placeholder="Admin Access Code" name='admin_code' required='true')
-          input(type='hidden' name="user_id" value=locals.currentUser._id)
-      div.form-group   
-          button.btn.btn-primary(type='submit') Gain Admin Access Rights
+
+    if errors
+      div(class='row mt-4')
+        div(class="alert alert-danger col")
+          ul
+            for error in errors
+              li!= error.msg
+    div(class='row')    
+      form(method='POST' action="")
+        div.form-group
+            label(for="admin_code") Please enter your Admin Access code:
+            input.form-control(type="text" placeholder="Admin Access Code" name='admin_code' required='true')
+            input(type='hidden' name="user_id" value=locals.currentUser._id)
+        div.form-group   
+            button.btn.btn-primary(type='submit') Gain Admin Access Rights
