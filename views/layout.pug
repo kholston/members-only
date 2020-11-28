@@ -19,7 +19,7 @@ html(lang='en')
             ul(class="navbar-nav ml-auto")
               if locals.currentUser
                 li(class="nav-item")
-                  a(href="#" class="nav-link") #{locals.currentUser.username} Profile
+                  a(href="/users/profile" class="nav-link") #{locals.currentUser.username} Profile
                 li(class="nav-item")
                   a(href="/users/log-out" class="nav-link") Log Out
               else

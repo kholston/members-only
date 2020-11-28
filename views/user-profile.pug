@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  div(class='col-sm-4 offset-sm-4 mt-4')
+    h1(class='text-center text-nowrap') #{locals.currentUser.username}'s Profile
+    
+    div(class='row mt-4')
+      h4 <strong>Name:</strong> #{locals.currentUser.first_name} #{locals.currentUser.last_name}
+    div(class='row')
+      h4 <strong>Username:</strong> #{locals.currentUser.username}
+    div(class='row')
+      h4 <strong>Email:</strong> #{locals.currentUser.email}
+    div(class='row')
+      h4 <strong>Member Status:</strong> #{locals.currentUser.member_status}
+    div(class='row')
+      p(class="mt-4")
+        a(href="#") Update Password
+    if locals.currentUser.member_status === 'User'
+      <hr/>
+      div(class='row mt-5')
+        p
+          a(href="/users/membership-upgrade") Upgrade Membership
+    if locals.currentUser.member_status === 'Admin'
+      <hr/>
+      div(class='row mt-5')
+        p
+          a(href="#") Admin Panel

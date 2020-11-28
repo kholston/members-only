@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  div(class='col-sm-4 offset-sm-4 mt-4')
+    h1.text-center.text-nowrap #{title}
+    
+    form(method='POST' action="")
+      div.form-group
+          label(for="member_code") Please enter the correct memberbership code:
+          input.form-control(type="text" placeholder="Membership Password Code" name='member_code' required='true')
+          input(type='hidden' name="user_id" value=locals.currentUser._id)
+      div.form-group   
+          button.btn.btn-primary(type='submit') Change Membership
