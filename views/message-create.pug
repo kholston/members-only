@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  .col-sm-4.offset-sm-4.mt-4
+    h1.mt-4 #{title}
+    
+    form(method='POST' action='')
+      div.form-group
+        label(for='body') Message Body
+        textarea#body.form-control(name='body' rows='4')
+      input#id.form-control(type='hidden' name='authorId' value=locals.currentUser._id)
+      .form-group
+        button.btn.btn-primary(type='submit') Create Message

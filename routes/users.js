@@ -18,6 +18,7 @@ router.post(
   userController.upgrade_membership_post,
 );
 
+// Admin routes
 router.get('/admin', userController.admin_form_get);
 router.post('/admin', userController.admin_form_post);
 

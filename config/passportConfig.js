@@ -1,37 +1,45 @@
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-const User = require("../models/user");
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const User = require('../models/user');
 
-exports.strategy = new LocalStrategy({
+exports.strategy = new LocalStrategy(
+  {
     usernameField: 'email',
+    passwordFiled: 'password',
   },
-  function(username, password, done) {
-    User.findOne({ email: username }, function(err, user) {
-      if (err) { return done(err) }
+  function (username, password, done) {
+    User.findOne({ email: username }, function (err, user) {
+      if (err) {
+        return done(err);
+      }
       if (!user) {
-        return done(null, false, { msg: "Incorrect Username or Password" });
+        return done(null, false, {
+          msg: 'Incorrect Username or Password',
+        });
       }
 
       user.comparePassword(password, (err, res) => {
-        if (err) { return done(err) }
+        if (err) {
+          return done(err);
+        }
         if (res) {
           return done(null, user);
+        } else {
+          return done(null, false, {
+            msg: 'Incorrect Username or Password',
+          });
         }
-        else {
-          return done(null, false, { msg: "Incorrect Username or Password" });
-        }
-
       });
     });
-  }
+  },
 );
 
-exports.serialize = function(user, done) {
+exports.serialize = function (user, done) {
   done(null, user.id);
 };
 
-exports.deserialize = function(id, done) {
-  User.findById(id, function(err, user) {
+exports.deserialize = function (id, done) {
+  User.findById(id, function (err, user) {
     done(err, user);
   });
 };

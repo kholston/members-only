@@ -1,7 +1,24 @@
 extends layout
 
 block content
-  h1.mt-4 #{title}
-  p Welcome to #{title}
+  .col-sm-4.offset-sm-4.mt-4
+    if locals.currentUser
+      form(method='GET' action='/messages/create')
+        button.btn.btn-primary(type='submit') Create New Message
+    h1.mt-4 #{title}
+    hr 
+    
+    ul.list-group
+      each message in message_list
+        li.list-group-item
+          if locals.currentUser && locals.currentUser.member_status !== 'Member'
+            h4 #{message.author.username}
+            h5 #{message.createdAt}
+          p #{message.body}
+          if locals.currentUser && locals.currentUser.admin === true
+            form(method="GET" action="/messages/message/" + message._id)
+              button.btn.btn-primary(type='submit') Delete Message
+          
+  
   
   
