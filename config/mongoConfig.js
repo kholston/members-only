@@ -9,6 +9,9 @@ exports.connectDB = function () {
     useUnifiedTopology: true,
   });
   const db = mongoose.connection;
-  db.on('error', debug('MongoDB connection error:'));
+  db.on(
+    'error',
+    console.error.bind(console, 'MongoDB connection error:'),
+  );
   console.log('mongoDB connected');
 };
