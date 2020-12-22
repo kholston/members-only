@@ -2,6 +2,9 @@
   "name": "members-only-app",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": "15.4.0"
+  },
   "scripts": {
     "start": "node ./bin/www",
     "serverstart": "nodemon ./bin/www",
