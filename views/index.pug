@@ -11,7 +11,7 @@ block content
     ul.list-group
       each message in message_list
         li.list-group-item
-          if locals.currentUser && locals.currentUser.member_status !== 'Member'
+          if locals.currentUser && locals.currentUser.member_status === 'Member'
             h4 #{message.author.username}
             h5 #{message.createdAt}
           p #{message.body}
